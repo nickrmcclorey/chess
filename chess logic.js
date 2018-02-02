@@ -66,12 +66,35 @@ function find(){
 }// of function find
 
 
+function find2(piece){
+  for (row=0; row < 8; row++) {
+    for(col=0; col < 8; col++) {
+      if (board.rows[row].cells[col].innerHTML == '_') {
+        if ( ((col-piece.xPos == row-piece.yPos) || (col-piece.xPos == piece.yPos-row)) && (col-piece.xPos !== 0) ) {
+          place(row,col,piece.inner);
+          remove(piece.yPos,piece.xPos);
+          piece.yPos=row;
+          piece.xPos=col;
+          if (board.rows[0].cells[0].firstChild.id) {
+            document.write(board.rows[2].cells[3].firstChild.id);
+            document.write(board.rows[0].cells[0].firstChild.id);
+          } ;
+        } else { // erase the marker
+          board.rows[row].cells[col].innerHTML = '';
+        }// of inner if
+      }// of outer if
+    }// of inner for
+  }// of inner for
+}// of function find
+
+
+
 k=0;
 for (i=0;i<8;i++) {
   for (k=0;k<8;k++) {
     board.rows[i].cells[k].addEventListener('click',function() {
       this.innerHTML = '_';
-      find();
+      find2(bishop2);
     }
   ,false);
   }// of inner for

@@ -27,10 +27,11 @@ var piece_selected = 0;
 var message_board = document.getElementById('message_board');
 
 
-function select(keep,piece_selected) {
+function find(keep,piece_selected) {
   for (row=0; row < 8; row++) {
     for(col=0; col < 8; col++) {
       if (board.rows[row].cells[col].innerHTML == '_') {
+
           board.rows[row].cells[col].innerHTML = keep;
           message_board.innerHTML=(piece_selected+" is selected. Its at "+piece_selected.xPos+" "+piece_selected.yPos);
       }// of inner if
@@ -39,23 +40,23 @@ function select(keep,piece_selected) {
 }// of inner for
 
 
-
-
+var keep;
 k=0;
 for (i=0;i<8;i++) {
   for (k=0;k<8;k++) {
     board.rows[i].cells[k].addEventListener('click',function() {
       if (gameState == 'toSelect') {
         if (this.firstChild.id) {
-          var keep = this.innerHTML;
+          keep = this.innerHTML;
           piece_selected = this.firstChild.id;
           this.innerHTML = '_';
-          select(keep,piece_selected);
+          find(keep,piece_selected);
           gameState = 'selected';
         }
 
       } else if (gameState == 'selected') {
-        var keep = this.innerHTML;
+        
+        keep = '';
         this.innerHTML = '_';
         gameState = 'toSelect';
         document.getElementById('message_board').textContent = gameState;

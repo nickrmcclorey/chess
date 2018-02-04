@@ -1,6 +1,5 @@
 var board = document.getElementById('board');// connects us to the board
-var gameState = 'toSelect';
-var turn = 'white'
+
 
 
 // setting up the boards colors
@@ -21,8 +20,9 @@ function place(row,col,inner) {
 }
 
 
-function bishop_setup(x_init,y_init,picPath,type) { // this is the class for pieces
+function bishop_setup(x_init,y_init,picPath,type,Team_on) { // this is the class for pieces
   this.type = type;
+  this.team = Team_on;
   this.xPos = x_init;
   document.write(this.xPos);
   this.yPos = y_init;
@@ -32,22 +32,20 @@ function bishop_setup(x_init,y_init,picPath,type) { // this is the class for pie
 
 }// of function bishop_setup
 
+
 var id = 1;
 var bishop1,bishop2,bishop3,bishop4;
-bishop1 = new bishop_setup(2,2,'pieces/blackBishop.png','bishop');
+bishop1 = new bishop_setup(2,2,'pieces/blackBishop.png','bishop','black');
 id++;
-bishop2 = new bishop_setup(2,3,'pieces/blackBishop.png','bishop');
+bishop2 = new bishop_setup(2,3,'pieces/blackBishop.png','bishop','black');
 id++;
-bishop3 = new bishop_setup(5,5,'pieces/whiteBishop.png','bishop');
-bishop3.inner = '<img src="pieces/whiteBishop.png" id =" '+ id +' " width="70" height="70"></img>'
+bishop3 = new bishop_setup(5,5,'pieces/whiteBishop.png','bishop','white');
+
 
 
 var allPieces = [bishop1, bishop2, bishop3, bishop4];
 function pieceById(id) {
   return allPieces[id-1];
-//document.write(id);
-
-
 }// of function pieceById
 
 

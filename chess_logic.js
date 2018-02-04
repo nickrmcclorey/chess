@@ -1,4 +1,5 @@
 
+
 var gameBoard = [
   [0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,0],
@@ -9,9 +10,17 @@ var gameBoard = [
   [0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,0]
 ];
-
 var gameState = 'toSelect';
-var piece_selected = 0;
+var selected_piece = 0;
+var turn = 'white';
+
+function changeTurn(){
+  turn = (turn == 'white') ? 'black':'white';
+}
+
+function moveIsValid() {
+  return 1;
+}
 
 function move_piece(piece){
 
@@ -40,9 +49,24 @@ function move_piece(piece){
 var message_board = document.getElementById('message_board');
 
 function manageClick(row,col) {
-  if (gameBoard[row][col] != 0) {
-    message_board.textContent = 'oh yeah were in buisiness';
+  if ((gameState == 'toSelect') && (gameBoard[row][col].team == turn)) {
+    selected_piece = gameBoard[row][col];
+    gameState = 'selected';
+    message_board.textContent = 'selected';
+  } else if ((moveIsValid(selected_piece) ) && (gameState == 'selected')) {
+    //place the piece in the new spot
+    place(row,col,selected_piece.inner);
+    gameBoard[row][col] = selected_piece;
+    // remove it from old spot
+    remove(selected_piece.yPos,selected_piece.xPos);
+    gameBoard[selected_piece.yPos][selected_piece.xPos] = 0;
+    // update selected_piece's value
+    gameBoard[row][col].yPos = row;
+    gameBoard[row][col].xPos = col;
+    gameState = 'toSelect'
+    changeTurn();
   }
+
 
 
 }// of function manageClick()
@@ -69,6 +93,7 @@ k=0;
 for (i=0;i<8;i++) {
   for (k=0;k<8;k++) {
     board.rows[i].cells[k].addEventListener('click',function() {
+
           keep = this.innerHTML;
           this.innerHTML = '_';
           find(keep);
@@ -80,4 +105,4 @@ for (i=0;i<8;i++) {
 
 
 var twod =[ [bishop1,2,bishop2],[4,5,6] ];
-document.write(gameBoard[2][2].type);
+document.write('working');

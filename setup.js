@@ -6,11 +6,11 @@ var turn = 'white'
 // setting up the boards colors
 for (k=0; k<8; k=k+2) {
   for (i=0; i<8; i=i+2) {
-    board.rows[k].cells[i].style.background="black";
+    board.rows[k].cells[i].style.background="white";
   }// of first inner for
 
   for (i=0; i<8; i=i+2) {
-    board.rows[k+1].cells[i+1].style.background="black";
+    board.rows[k+1].cells[i+1].style.background="white";
 
   }// of second inner loop
 }// of outer for
@@ -27,7 +27,7 @@ function bishop_setup(x_init,y_init,id,type) { // this is the class for pieces
   document.write(this.xPos);
   this.yPos = y_init;
   this.type = 'bishop';
-  this.inner = '<img src="pieces/bishop.jpg" id =" '+ id +' " width="70" height="70"></img>';
+  this.inner = '<img src="pieces/blackBishop.png" id =" '+ id +' " width="70" height="70"></img>';
   place(y_init,x_init,this.inner);
 
 }// of function bishop_setup
@@ -39,7 +39,7 @@ id++;
 bishop2 = new bishop_setup(2,3,id,'bishop');
 id++;
 bishop3 = new bishop_setup(5,5,id,'bishop');
-
+bishop3.inner = '<img src="pieces/whiteBishop.png" id =" '+ id +' " width="70" height="70"></img>'
 
 
 var allPieces = [bishop1, bishop2, bishop3, bishop4];

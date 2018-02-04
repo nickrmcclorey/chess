@@ -68,5 +68,5 @@ for (i=0;i<8;i++) {
 }// of outer loop
 
 
-var twod =[ [1,2,3],[4,5,6] ];
-document.write(twod[1][1]);
+var twod =[ [bishop1,2,bishop2],[4,5,6] ];
+document.write(twod[0][2].type);

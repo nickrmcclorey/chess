@@ -132,6 +132,22 @@ function isValidRook(row,col) {
 }// of isValidRook
 
 
+function isValidQueen(row,col) {
+  if (abs(row-selected_piece.yPos) == abs(col-selected_piece.xPos)) {
+    return isValidBishop(row,col);
+  } else {
+    return isValidRook(row,col);
+  }
+
+}
+
+function isValidKing(row,col) {
+  if ((abs(row-selected_piece.yPos) > 1) || (abs(col-selected_piece.xPos > 1))) {
+    return 0;
+  } else {
+    return 1;
+  }
+}
 
 function moveIsValid(row,col) {
   // make sure they don't move to a teammates postion
@@ -146,6 +162,10 @@ function moveIsValid(row,col) {
     return isValidKnight(row,col);
   } else if (selected_piece.type == 'rook') {
     return isValidRook(row,col);
+  } else if (selected_piece.type == 'queen') {
+    return isValidQueen(row,col);
+  } else if (selected_piece.type == 'king') {
+    return isValidKing(row,col);
   }
 
   return 1;

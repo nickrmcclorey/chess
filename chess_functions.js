@@ -48,11 +48,11 @@ function isValidBishop(row,col) {
 
       return 0;
 
-
     } else if (distance == 1) {
       return 1;
-    // checking for pieces in the way. you can't go through someone
-    } else {
+
+
+    } else { // checking for pieces in the way. you can't go through someone
     var ycounter = 0;
     var xcounter = 0;
     var counter = 0;
@@ -63,12 +63,11 @@ function isValidBishop(row,col) {
       // these if else branches increment the ycounter and xcounter in a way
       // that all the spots in between will be checked
       if ((col-selected_piece.xPos < 0) && (row-selected_piece.yPos > 0)) {
-        ycounter++;
-        xcounter=xcounter-1;
-      } else if ((col-selected_piece.xPos < 0) && (row-selected_piece.yPos) < 0) {
-        ycounter--;
+        ycounter++; // player is moving down left
         xcounter--;
-
+      } else if ((col-selected_piece.xPos < 0) && (row-selected_piece.yPos) < 0) {
+        ycounter--; // player is movign up left
+        xcounter--;
       } else if ((col-selected_piece.xPos > 0) && (row-selected_piece.yPos) < 0) {
         ycounter--;
         xcounter++;
@@ -76,23 +75,61 @@ function isValidBishop(row,col) {
         ycounter++;
         xcounter++;
       }
-      // checks to see if a piece is in a spot in the way before continuing
+
+      // checks to see if a piece is in a spot in the way counters are incremmented above to check correct spots
       if ( gameBoard[selected_piece.yPos+ycounter][selected_piece.xPos+xcounter] != 0) {
 
-        //document.write(selected_piece.xPos+counter);
           return 0;
-      }
+      }// of small if
       counter++;
-  }// of while loop
+    }// of while loop
   return 1; // means none of the bad conditons were met so proceed
-  }
+  } // of giant if
 }// of function isValidBishop
 
 
 //checks to see if a knight is allowed to do a move
-//function isValidKnight(row,col)
+function isValidKnight(row,col) {
+  if ((abs(row-selected_piece.yPos) == abs(col-selected_piece.xPos)/2) || (abs(row-selected_piece.yPos)/2 == abs(col-selected_piece.xPos))) {
+    return 1;
+  }
+}
 
 
+function isValidRook(row,col) {
+  if ((row-selected_piece.yPos != 0) && (col-selected_piece.xPos != 0)) {
+    return 0;
+  } else if (abs(row-selected_piece.yPos)){
+    var distance = abs(row-selected_piece.yPos);
+
+  } else {
+    var distance = abs(col-selected_piece.xPos);
+  }
+
+
+  var xcounter = 0;
+  var ycounter = 0;
+  var counter = 1;
+  while (counter < distance) {
+    if (col > selected_piece.xPos) {
+      xcounter++;
+    } else if (col < selected_piece.xPos) {
+      xcounter--;
+    } else if (row > selected_piece.yPos) {
+      ycounter++;
+    } else {
+      ycounter--;
+    }
+
+    if ( gameBoard[selected_piece.yPos+ycounter][selected_piece.xPos+xcounter]) {
+        return 0;
+    }// of small if
+
+    counter++;
+  }// of while
+
+  return 1;
+}// of isValidRook
 
 
 
@@ -105,6 +142,10 @@ function moveIsValid(row,col) {
 
   if (selected_piece.type == 'bishop') {
     return isValidBishop(row,col,spot);
+  } else if (selected_piece.type == 'knight') {
+    return isValidKnight(row,col);
+  } else if (selected_piece.type == 'rook') {
+    return isValidRook(row,col);
   }
 
   return 1;

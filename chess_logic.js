@@ -1,4 +1,17 @@
 
+var gameBoard = [
+  [0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0],
+  [0,0,bishop1,0,0,0,0,0],
+  [0,0,bishop2,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,bishop3,0,0],
+  [0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0]
+];
+
+var gameState = 'toSelect';
+var piece_selected = 0;
 
 function move_piece(piece){
 
@@ -23,21 +36,32 @@ function move_piece(piece){
 }// of function find
 
 
-var piece_selected = 0;
+
 var message_board = document.getElementById('message_board');
 
+function manageClick(row,col) {
+  if (gameBoard[row][col] != 0) {
+    message_board.textContent = 'oh yeah were in buisiness';
+  }
 
-function find(keep,piece_selected) {
+
+}// of function manageClick()
+
+
+function find(keep) {
+  var row; var col;
   for (row=0; row < 8; row++) {
     for(col=0; col < 8; col++) {
       if (board.rows[row].cells[col].innerHTML == '_') {
 
           board.rows[row].cells[col].innerHTML = keep;
-          message_board.innerHTML=(piece_selected+" is selected. Its at "+piece_selected.xPos+" "+piece_selected.yPos);
-      }// of inner if
-    }// of outer if
-  }// of inner for
-}// of inner for
+          message_board.innerHTML=(gameBoard[row][col].type);
+          manageClick(row,col);
+      }// of if
+    }// of inner for
+  }// of outer for
+
+}// of function find()
 
 
 var keep;
@@ -45,23 +69,10 @@ k=0;
 for (i=0;i<8;i++) {
   for (k=0;k<8;k++) {
     board.rows[i].cells[k].addEventListener('click',function() {
-      if (gameState == 'toSelect') {
-        if (this.firstChild.id) {
           keep = this.innerHTML;
-          piece_selected = this.firstChild.id;
           this.innerHTML = '_';
-          find(keep,piece_selected);
-          gameState = 'selected';
-        }
+          find(keep);
 
-      } else if (gameState == 'selected') {
-
-        keep = '';
-        this.innerHTML = '_';
-        gameState = 'toSelect';
-        document.getElementById('message_board').textContent = gameState;
-        move_piece(pieceById(piece_selected,keep));
-      }
     }// of function in event listener
   ,false);
   }// of inner for
@@ -69,4 +80,4 @@ for (i=0;i<8;i++) {
 
 
 var twod =[ [bishop1,2,bishop2],[4,5,6] ];
-document.write(twod[0][2].type);
+document.write(gameBoard[2][2].type);

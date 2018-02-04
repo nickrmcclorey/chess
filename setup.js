@@ -21,24 +21,24 @@ function place(row,col,inner) {
 }
 
 
-function bishop_setup(x_init,y_init,id,type) { // this is the class for pieces
+function bishop_setup(x_init,y_init,picPath,type) { // this is the class for pieces
   this.type = type;
   this.xPos = x_init;
   document.write(this.xPos);
   this.yPos = y_init;
   this.type = 'bishop';
-  this.inner = '<img src="pieces/blackBishop.png" id =" '+ id +' " width="70" height="70"></img>';
+  this.inner = '<img src="'+picPath+'" width="70" height="70"></img>';
   place(y_init,x_init,this.inner);
 
 }// of function bishop_setup
 
 var id = 1;
 var bishop1,bishop2,bishop3,bishop4;
-bishop1 = new bishop_setup(2,2,id,'bishop');
+bishop1 = new bishop_setup(2,2,'pieces/blackBishop.png','bishop');
 id++;
-bishop2 = new bishop_setup(2,3,id,'bishop');
+bishop2 = new bishop_setup(2,3,'pieces/blackBishop.png','bishop');
 id++;
-bishop3 = new bishop_setup(5,5,id,'bishop');
+bishop3 = new bishop_setup(5,5,'pieces/whiteBishop.png','bishop');
 bishop3.inner = '<img src="pieces/whiteBishop.png" id =" '+ id +' " width="70" height="70"></img>'
 
 

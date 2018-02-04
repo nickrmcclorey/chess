@@ -1,26 +1,19 @@
 
 
 var gameBoard = [
+  [rook1,knight1,bishop1,queen1,king1,bishop2,knight2,rook2],
+  [pawn1,pawn2,pawn3,pawn4,pawn5,pawn6,pawn7,pawn8],
   [0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,0],
-  [0,0,bishop1,0,0,0,0,0],
-  [0,0,bishop2,0,0,0,0,0],
   [0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,bishop3,0,0],
   [0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0]
+  [pawn9,pawn10,pawn11,pawn12,pawn13,pawn14,pawn15,pawn16],
+  [rook3,knight3,bishop4,queen2,king2,bishop3,knight4,rook4]
 ];
 var gameState = 'toSelect';
 var selected_piece = 0;
 var turn = 'white';
 
-function changeTurn(){
-  turn = (turn == 'white') ? 'black':'white';
-}
-
-function moveIsValid() {
-  return 1;
-}
 
 function move_piece(piece){
 
@@ -53,21 +46,9 @@ function manageClick(row,col) {
     selected_piece = gameBoard[row][col];
     gameState = 'selected';
     message_board.textContent = 'selected';
-  } else if ((moveIsValid(selected_piece) ) && (gameState == 'selected')) {
-    //place the piece in the new spot
-    place(row,col,selected_piece.inner);
-    gameBoard[row][col] = selected_piece;
-    // remove it from old spot
-    remove(selected_piece.yPos,selected_piece.xPos);
-    gameBoard[selected_piece.yPos][selected_piece.xPos] = 0;
-    // update selected_piece's value
-    gameBoard[row][col].yPos = row;
-    gameBoard[row][col].xPos = col;
-    gameState = 'toSelect'
-    changeTurn();
+  } else if ((moveIsValid() ) && (gameState == 'selected')) {
+    movePiece(row,col);
   }
-
-
 
 }// of function manageClick()
 

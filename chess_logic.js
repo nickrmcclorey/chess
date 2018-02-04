@@ -46,8 +46,11 @@ function manageClick(row,col) {
     selected_piece = gameBoard[row][col];
     gameState = 'selected';
     message_board.textContent = 'selected';
-  } else if ((moveIsValid() ) && (gameState == 'selected')) {
+  } else if ((moveIsValid(row,col) ) && (gameState == 'selected')) {
     movePiece(row,col);
+
+  } else {
+    gameState = 'toSelect';
   }
 
 }// of function manageClick()

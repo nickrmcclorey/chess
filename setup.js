@@ -18,12 +18,11 @@ for (k=0; k<8; k=k+2) {
 
 
 
-function piece_setup(x_init,y_init,picPath,type,Team_on) { // this is the class for pieces
-  this.type = type;
+function piece_setup(x_init,y_init,picPath,type_par,Team_on) { // this is the class for pieces
+  this.type = type_par;
   this.team = Team_on;
   this.xPos = x_init;
   this.yPos = y_init;
-  this.type = 'bishop';
   this.inner = '<img src="'+picPath+'" width="70" height="70"></img>';
   place(y_init,x_init,this.inner);
 

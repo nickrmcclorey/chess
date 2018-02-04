@@ -2,7 +2,7 @@ var board = document.getElementById('board');// connects us to the board
 
 
 
-// setting up the boards colors
+// creating the checker pattern on the board
 for (k=0; k<8; k=k+2) {
   for (i=0; i<8; i=i+2) {
     board.rows[k].cells[i].style.background="white";
@@ -29,7 +29,7 @@ function piece_setup(x_init,y_init,picPath,type_par,Team_on) { // this is the cl
 }// of function piece_setup
 
 
-// initializing up all the pieces
+// initializing all the pieces
 // bishops
 var bishop1,bishop2,bishop3,bishop4;
 bishop1 = new piece_setup(2,0,'pieces/blackBishop.png','bishop','black');
@@ -61,7 +61,7 @@ var king1,king2;
 king1 = new piece_setup(4,0,'pieces/blackKing.png','king','black');
 king2 = new piece_setup(4,7,'pieces/whiteKing.png','king','white');
 
-// pawns
+// black pawns
 var pawnPath = 'pieces/blackPawn.png';
 var pawn1,pawn2,pawn3,pawn4,pawn5,pawn6,pawn7,pawn8;
  pawn1 = new piece_setup(0,1,pawnPath,'pawn','black');
@@ -73,6 +73,7 @@ var pawn1,pawn2,pawn3,pawn4,pawn5,pawn6,pawn7,pawn8;
  pawn7 = new piece_setup(6,1,pawnPath,'pawn','black');
  pawn8 = new piece_setup(7,1,pawnPath,'pawn','black');
 
+// white pawns
 pawnPath = 'pieces/whitePawn.png';
 var pawn9,pawn10,pawn11,pawn12,pawn13,pawn14,pawn15,pawn16;
  pawn9  = new piece_setup(0,6,pawnPath,'pawn','white');

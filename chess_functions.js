@@ -149,6 +149,18 @@ function isValidKing(row,col) {
   }
 }
 
+function isValidPawn(row,col,dx,dy) {
+  if ((selected_piece.team == 'white') && (dy == -1)) {
+    return 1;
+  } else if ((selected_piece.team == 'black') && (dy ==1) && (dx == 0)) {
+    return 1;
+  } else if ((abs(dx)==1) && (abs(dy)==1) && (gameBoard[row][col].team != selected_piece.team)) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
 function moveIsValid(row,col) {
   // make sure they don't move to a teammates postion
   var spot = gameBoard[row][col];
@@ -156,6 +168,8 @@ function moveIsValid(row,col) {
     return 0;
   }
 
+  var dx = col-selected_piece.xPos;
+  var dy = row-selected_piece.yPos;
   if (selected_piece.type == 'bishop') {
     return isValidBishop(row,col,spot);
   } else if (selected_piece.type == 'knight') {
@@ -166,6 +180,8 @@ function moveIsValid(row,col) {
     return isValidQueen(row,col);
   } else if (selected_piece.type == 'king') {
     return isValidKing(row,col);
+  } else {
+    return isValidPawn(row,col,dx,dy);
   }
 
   return 1;

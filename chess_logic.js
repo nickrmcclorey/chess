@@ -13,32 +13,6 @@ var gameBoard = [
 var gameState = 'toSelect';
 var selected_piece = 0;
 var turn = 'white';
-
-
-function move_piece(piece){
-
-  for (row=0; row < 8; row++) {
-    for(col=0; col < 8; col++) {
-      if (board.rows[row].cells[col].innerHTML == '_') {
-        if ( ((col-piece.xPos == row-piece.yPos) || (col-piece.xPos == piece.yPos-row)) && (col-piece.xPos !== 0) ) {
-          place(row,col,piece.inner);
-          remove(piece.yPos,piece.xPos);
-          piece.yPos=row;
-          piece.xPos=col;
-          if (board.rows[0].cells[0].firstChild.id) {
-            document.write(board.rows[2].cells[3].firstChild.id);
-            document.write(board.rows[0].cells[0].firstChild.id);
-          } ;
-        } else { // erase the marker
-          board.rows[row].cells[col].innerHTML = keep;
-        }// of inner if
-      }// of outer if
-    }// of inner for
-  }// of inner for
-}// of function find
-
-
-
 var message_board = document.getElementById('message_board');
 
 function manageClick(row,col) {

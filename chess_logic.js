@@ -13,18 +13,20 @@ var gameBoard = [
 var gameState = 'toSelect';
 var selected_piece = 0;
 var turn = 'white';
+var opponent = 'black';
 var message_board = document.getElementById('message_board');
 
 function manageClick(row,col) {
   if ((gameState == 'toSelect') && (gameBoard[row][col].team == turn)) {
     selected_piece = gameBoard[row][col];
     gameState = 'selected';
-    message_board.textContent = 'selected';
+    message_board.textContent = selected_piece.type + ' selected';
   } else if ((moveIsValid(row,col) ) && (gameState == 'selected')) {
     movePiece(row,col);
-
+    message_board.textContent = turn+"'s turn";
   } else {
     gameState = 'toSelect';
+    message_board.textContent = turn+"'s turn";
   }
 
 }// of function manageClick()
@@ -37,7 +39,7 @@ function find(keep) {
       if (board.rows[row].cells[col].innerHTML == '_') {
 
           board.rows[row].cells[col].innerHTML = keep;
-          message_board.innerHTML=(gameBoard[row][col].type);
+          //message_board.innerHTML=(gameBoard[row][col].type);
           manageClick(row,col);
       }// of if
     }// of inner for

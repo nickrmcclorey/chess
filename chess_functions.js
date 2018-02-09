@@ -42,8 +42,8 @@ function movePiece(row,col) {
 
 // checks to see if a bishop can do a certain move
 function isValidBishop(row,col) {
-    document.getElementById('cnn').textContent=(col-selected_piece.xPos);
     var distance = abs(col-selected_piece.xPos);
+
     if (abs(row-selected_piece.yPos) != abs(col-selected_piece.xPos)) {
 
       return 0;
@@ -56,10 +56,10 @@ function isValidBishop(row,col) {
     var ycounter = 0;
     var xcounter = 0;
     var counter = 0;
-    document.getElementById('cnn').textContent=distance;
+
     // loops through all the spots between where the piece is and where it
     // wants to go, checking to see if anyone is there, blocking the path
-    while (counter < distance) {
+    while (counter < distance-1) {
       // these if else branches increment the ycounter and xcounter in a way
       // that all the spots in between will be checked
       if ((col-selected_piece.xPos < 0) && (row-selected_piece.yPos > 0)) {
@@ -134,6 +134,7 @@ function isValidRook(row,col) {
 
 function isValidQueen(row,col) {
   if (abs(row-selected_piece.yPos) == abs(col-selected_piece.xPos)) {
+    //document.write("firing");
     return isValidBishop(row,col);
   } else {
     return isValidRook(row,col);
@@ -150,12 +151,12 @@ function isValidKing(row,col) {
 }
 
 function isValidPawn(row,col,dx,dy) {
-  if ((selected_piece.team == 'white') && (dy == -1)) {
-    return 1;
+  if ((selected_piece.team == 'white') && (dy == -1) && (dx==0)) {
+    return 1; // for white moving up
   } else if ((selected_piece.team == 'black') && (dy ==1) && (dx == 0)) {
-    return 1;
-  } else if ((abs(dx)==1) && (abs(dy)==1) && (gameBoard[row][col].team != selected_piece.team)) {
-    return 1;
+    return 1; // for black moving down
+  } else if ((abs(dx)==1) && (abs(dy)==1) && (gameBoard[row][col] != 0)) {
+    return 1; // if they move diagonally to take another piece
   } else {
     return 0;
   }
@@ -180,9 +181,9 @@ function moveIsValid(row,col) {
     return isValidQueen(row,col);
   } else if (selected_piece.type == 'king') {
     return isValidKing(row,col);
-  } else {
+  } else if (selected_piece.type == 'pawn'){
     return isValidPawn(row,col,dx,dy);
   }
 
-  return 1;
+  return 0;
 }

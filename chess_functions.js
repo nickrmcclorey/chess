@@ -91,8 +91,11 @@ function isValidBishop(row,col) {
 //checks to see if a knight is allowed to do a move
 function isValidKnight(row,col) {
   if ((abs(row-selected_piece.yPos) == abs(col-selected_piece.xPos)/2) || (abs(row-selected_piece.yPos)/2 == abs(col-selected_piece.xPos))) {
-    return 1;
+    if ((abs(row-selected_piece.yPos) == 1) || (abs(col-selected_piece.xPos) == 1)  ) {
+      return 1;
+    }
   }
+  return 0;
 }
 
 
@@ -143,7 +146,7 @@ function isValidQueen(row,col) {
 }
 
 function isValidKing(row,col) {
-  if ((abs(row-selected_piece.yPos) > 1) || (abs(col-selected_piece.xPos > 1))) {
+  if ((abs(row-selected_piece.yPos) > 1) || (abs(col-selected_piece.xPos) > 1)) {
     return 0;
   } else {
     return 1;

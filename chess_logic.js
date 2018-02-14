@@ -16,17 +16,32 @@ var turn = 'white';
 var opponent = 'black';
 var message_board = document.getElementById('message_board');
 
+function show_valid_moves() {
+  for (k = 0; k < 8; k++) {
+    for (i = 0; i < 8; i++) {
+      if (moveIsValid(k,i)) {
+        board.rows[k].cells[i].style.background="orange";
+      }
+    }
+  }
+}
+
 function manageClick(row,col) {
   if ((gameState == 'toSelect') && (gameBoard[row][col].team == turn)) {
     selected_piece = gameBoard[row][col];
     gameState = 'selected';
     message_board.textContent = selected_piece.type + ' selected';
+    show_valid_moves();
+
   } else if ((moveIsValid(row,col) ) && (gameState == 'selected')) {
     movePiece(row,col);
     message_board.textContent = turn+"'s turn";
+    createPattern();
+
   } else {
     gameState = 'toSelect';
     message_board.textContent = turn+"'s turn";
+    createPattern();
   }
 
 }// of function manageClick()

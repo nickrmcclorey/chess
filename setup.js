@@ -1,20 +1,22 @@
 var board = document.getElementById('board');// connects us to the board
 
 
+function createPattern() {
+  // creating the checker pattern on the board
+  for (k=0; k<8; k=k+2) {
+    for (i=0; i<8; i=i+2) {
+      board.rows[k].cells[i].style.background="white";
+      board.rows[k].cells[i+1].style.background="#e72e2e";
+    }// of first inner for
 
-// creating the checker pattern on the board
-for (k=0; k<8; k=k+2) {
-  for (i=0; i<8; i=i+2) {
-    board.rows[k].cells[i].style.background="white";
-  }// of first inner for
+    for (i=0; i<8; i=i+2) {
+      board.rows[k+1].cells[i+1].style.background="white";
+      board.rows[k+1].cells[i].style.background="#e72e2e";
 
-  for (i=0; i<8; i=i+2) {
-    board.rows[k+1].cells[i+1].style.background="white";
-
-  }// of second inner loop
-}// of outer for
-
-
+    }// of second inner loop
+  }// of outer for
+}
+createPattern();
 
 
 

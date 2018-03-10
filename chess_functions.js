@@ -154,9 +154,12 @@ function isValidKing(row,col) {
 }
 
 function isValidPawn(row,col,dx,dy) {
-  if ((selected_piece.team == 'white') && (dy == -1) && (dx==0)) {
+
+
+
+  if ((selected_piece.team == 'white') && (((dy == -1) && (dx==0)) || ((selected_piece.yPos == 6) && (dy == -2) && (dx == 0)   )  ) ) {
     return 1; // for white moving up
-  } else if ((selected_piece.team == 'black') && (dy ==1) && (dx == 0)) {
+  } else if ((selected_piece.team == 'black') && (((dy == 1) && (dx==0)) || ((selected_piece.yPos == 1) && (dy == 2) && (dx == 0)   )  ) ) {
     return 1; // for black moving down
   } else if ((abs(dx)==1) && (abs(dy)==1) && (gameBoard[row][col] != 0)) {
     return 1; // if they move diagonally to take another piece

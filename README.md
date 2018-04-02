@@ -1,4 +1,4 @@
-# web_chess
+# web chess
 This is a game of chess made by Nick McClorey. It consists of about 300 lines of HTML, CSS and mostly javascript.
 chess_functions.js contains functions to check to see if a piece is allowed to move a certain way as well as some other 
 small functions called later on

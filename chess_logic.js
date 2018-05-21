@@ -80,4 +80,3 @@ for (i=0;i<8;i++) {
 
 
 var twod =[ [bishop1,2,bishop2],[4,5,6] ];
-document.write('working');
